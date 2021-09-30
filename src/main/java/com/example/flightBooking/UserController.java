@@ -10,25 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1.0/flight")
-public class FlightController {
-	
-	@PostMapping("/airline/register")
-	String registerAirline(@RequestBody Airline airline) {
-		System.out.println(airline);
-		return "Successfully Booked Airline";
-	}
-	
-	@PostMapping("/admin/login")
-	String adminLogin(@RequestBody AdminLogin details) {
-		System.out.print(details);
-		return "Successfully Logged In";
-	}
-	
-	@PostMapping("/airline/inventory/add")
-	String addInventory(@RequestBody Flight flight) {
-		return "Successfully added";
-	}
-	
+public class UserController {
 	@PostMapping("/booking/{flightId}")
 	String bookingFlight(@PathVariable int flightId) {
 		return "Successfully Booked";
