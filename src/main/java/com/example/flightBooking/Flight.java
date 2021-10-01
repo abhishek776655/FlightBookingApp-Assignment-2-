@@ -16,7 +16,7 @@ public class Flight {
 	private String flightName;
 	private Airline airline;
 	private City fromPlace;
-	private City designation;
+	private City destination;
 	private Date takeOffTime;
 	private Date landingTime;
 	private int businessSeats;
@@ -47,12 +47,6 @@ public class Flight {
 	}
 	public void setFromPlace(City fromPlace) {
 		this.fromPlace = fromPlace;
-	}
-	public City getDesignation() {
-		return designation;
-	}
-	public void setDesignation(City designation) {
-		this.designation = designation;
 	}
 	public Date getTakeOffTime() {
 		return takeOffTime;
@@ -89,6 +83,12 @@ public class Flight {
 	}
 	public void setNoOfRows(int noOfRows) {
 		this.noOfRows = noOfRows;
+	}
+	public City getDestination() {
+		return destination;
+	}
+	public void setDestination(City destination) {
+		this.destination = destination;
 	}
 	
 }

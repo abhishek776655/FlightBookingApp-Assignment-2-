@@ -15,6 +15,6 @@ public class FlightService {
 	}
 	
 	List<Flight> searchFlight(Flight flight) {
-		return repository.findByFromPlaceOrDesignationOrTakeOffTimeOrLandingTime(flight.getFromPlace(), flight.getDesignation(), flight.getTakeOffTime(), flight.getLandingTime());
+		return repository.findByFromPlaceOrDestinationOrTakeOffTimeOrLandingTime(flight.getFromPlace(), flight.getDestination(), flight.getTakeOffTime(), flight.getLandingTime());
 	}
 }
