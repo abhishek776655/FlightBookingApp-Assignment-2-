@@ -1,5 +1,6 @@
 package com.example.flightBooking;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1.0/flight")
 public class AdminController {
+	@Autowired
+	AdminService adminService;
 	@PostMapping("/airline/register")
 	String registerAirline(@RequestBody Airline airline) {
 		System.out.println(airline);
@@ -22,6 +25,7 @@ public class AdminController {
 	
 	@PostMapping("/airline/inventory/add")
 	String addInventory(@RequestBody Flight flight) {
+		adminService.addFlight(flight);
 		return "Successfully added";
 	}
 	

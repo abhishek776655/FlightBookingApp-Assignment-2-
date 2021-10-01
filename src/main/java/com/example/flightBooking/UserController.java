@@ -1,5 +1,8 @@
 package com.example.flightBooking;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,19 +14,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1.0/flight")
 public class UserController {
+	
+	@Autowired
+	UserService userService;
 	@PostMapping("/booking/{flightId}")
-	String bookingFlight(@PathVariable int flightId) {
+	String bookingFlight(@PathVariable int flightId,@RequestBody Ticket ticket ) {
+		userService.addTicket(ticket,flightId);
 		return "Successfully Booked";
 	}
 	
 	@PostMapping("/search")
-	String searchFlight(@RequestBody Flight flight) {
-		return "results";
+	List<Flight> searchFlight(@RequestBody Flight flight) {
+		return userService.searchFlight(flight);
 	}
 	
 	@GetMapping("/ticket/{pnr}")
-		String getBookedTicketsByPnr(@PathVariable int pnr) {
-		return "results";
+		Ticket getBookedTicketsByPnr(@PathVariable int pnr) {
+		return userService.getTicket(pnr);
 	}
 	
 	@GetMapping("/booking/history/{emailId")
