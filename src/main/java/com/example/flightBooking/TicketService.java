@@ -1,21 +1,14 @@
 package com.example.flightBooking;
 
-import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
-	@Autowired
-	FlightRepository repository;
+public class TicketService {
 	@Autowired
 	TicketRepository ticketRepository;
-	
-	List<Flight> searchFlight(Flight flight) {
-		return repository.findByFromPlaceOrDesignationOrTakeOffTimeOrLandingTime(flight.getFromPlace(), flight.getDesignation(), flight.getTakeOffTime(), flight.getLandingTime());
-	}
 	
 	Ticket getTicket(int pnr) {
 		return ticketRepository.findByPnr(pnr);
