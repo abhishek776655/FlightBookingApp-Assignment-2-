@@ -9,12 +9,9 @@ import com.sun.istack.NotNull;
 
 @Entity
 public class Admin {
-	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	private Integer id;
-	
 	@NotNull
 	private String email;
 	@NotNull

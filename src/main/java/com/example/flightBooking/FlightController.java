@@ -8,10 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.flightBooking.constants.AirlineEnum;
-
-import javassist.NotFoundException;
-
 @RestController
 @RequestMapping("/api/v1.0/flight")
 public class FlightController {
@@ -34,7 +30,7 @@ public class FlightController {
 		try {
 			return adminService.login(admin);
 		} catch (Exception e) {
-			return "Invalid Arguements";
+			return "Invalid Arguement";
 		}
 	}
 	

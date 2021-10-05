@@ -1,7 +1,6 @@
 package com.example.flightBooking;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +39,7 @@ public class TicketService {
 	
 	void cancelTicket(int pnr) {
 		 Ticket ticket = ticketRepository.findByPnr(pnr);
-		 ticketRepository.delete(ticket);
-		
-		
+		 ticketRepository.delete(ticket);	
 	}
 	
 }
