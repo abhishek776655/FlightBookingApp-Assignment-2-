@@ -10,8 +10,19 @@ public class FlightService {
 	@Autowired
 	FlightRepository repository;
 	
-	void addFlight(Flight flight) {
-		repository.save(flight);
+	@Autowired
+	AirlineRepository airlineRepository;
+	
+	void addFlight(Flight flight) throws Exception {
+		Airline airline = airlineRepository.findByName(flight.getAirline().getName());
+		if(airline!=null) {
+			flight.setAirline(airline);
+			repository.save(flight);
+		}
+		else {
+			throw new Exception("Incorrect Airline");
+		}
+		
 	}
 	
 	List<Flight> searchFlight(Flight flight) {

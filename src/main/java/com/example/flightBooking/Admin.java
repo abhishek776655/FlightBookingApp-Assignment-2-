@@ -1,12 +1,23 @@
 package com.example.flightBooking;
 
-public class AdminLogin {
-	public AdminLogin(String email, String password) {
-		super();
-		this.email = email;
-		this.password = password;
-	}
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.sun.istack.NotNull;
+
+@Entity
+public class Admin {
+	
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY )
+	private Integer id;
+	
+	@NotNull
 	private String email;
+	@NotNull
 	private String password;
 	public String getEmail() {
 		return email;

@@ -1,16 +1,31 @@
 package com.example.flightBooking;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.example.flightBooking.constants.Meal;
 @Entity
 public class Ticket {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	private Integer id;
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	private Integer pnr;
-	private Integer flightId;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Flight flight;
 	private String name;
 	private String email;
 	private Meal meal;
@@ -45,10 +60,12 @@ public class Ticket {
 	public void setPnr(Integer pnr) {
 		this.pnr = pnr;
 	}
-	public Integer getFlightId() {
-		return flightId;
+
+	public Flight getFlight() {
+		return flight;
 	}
-	public void setFlightId(Integer flightId) {
-		this.flightId = flightId;
+	public void setFlight(Object flight2) {
+		this.flight = (Flight) flight2;
 	}
+	
 }

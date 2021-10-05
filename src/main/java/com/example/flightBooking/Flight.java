@@ -2,10 +2,15 @@ package com.example.flightBooking;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import com.example.flightBooking.constants.AirlineEnum;
+import com.example.flightBooking.constants.City;
 
 @Entity
 public class Flight {
@@ -14,6 +19,8 @@ public class Flight {
 	private Integer flightId;
 	
 	private String flightName;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Airline airline;
 	private City fromPlace;
 	private City destination;

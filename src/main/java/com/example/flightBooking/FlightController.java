@@ -8,21 +8,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.flightBooking.constants.AirlineEnum;
+
+import javassist.NotFoundException;
+
 @RestController
 @RequestMapping("/api/v1.0/flight")
 public class FlightController {
 	@Autowired
 	FlightService flightService;
+	
+	@Autowired
+	AirlineService airlineService;
+	
+	@Autowired
+	AdminService adminService;
+	
 	@PostMapping("/airline/register")
-	String registerAirline(@RequestBody Airline airline) {
-		System.out.println(airline);
-		return "Successfully Booked Airline";
+	Airline registerAirline(@RequestBody Airline airline) {
+		return airlineService.addAirline(airline);
 	}
 	
 	@PostMapping("/admin/login")
-	String adminLogin(@RequestBody AdminLogin details) {
-		System.out.print(details);
-		return "Successfully Logged In";
+	String adminLogin(@RequestBody Admin admin) {
+		try {
+			return adminService.login(admin);
+		} catch (Exception e) {
+			return "Invalid Arguements";
+		}
+	}
+	
+	@PostMapping("/admin/register")
+	Admin adminRegister(@RequestBody Admin admin) {
+		return adminService.createAdmin(admin);
+		
 	}
 	
 	@PostMapping("/search")
@@ -31,9 +50,15 @@ public class FlightController {
 	}
 	
 	@PostMapping("/airline/inventory/add")
-	String addInventory(@RequestBody Flight flight) {
-		flightService.addFlight(flight);
+	String addInventory(@RequestBody Flight flight)  {
+		try {
+			flightService.addFlight(flight);
+		} catch (Exception e) {
+			return "Error";
+		}
 		return "Successfully added";
+		
+	
 	}
 	
 }

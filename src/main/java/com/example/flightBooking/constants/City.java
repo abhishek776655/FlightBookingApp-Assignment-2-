@@ -1,4 +1,4 @@
-package com.example.flightBooking;
+package com.example.flightBooking.constants;
 
 public enum City {
 Delhi,
