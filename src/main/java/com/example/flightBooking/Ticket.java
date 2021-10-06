@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 
 
 import com.example.flightBooking.constants.Meal;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 public class Ticket {
 	@Id
@@ -22,8 +23,22 @@ public class Ticket {
 	}
 	private Integer pnr;
 	
+	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Flight flight;
+	
+	@JsonBackReference
+	@ManyToOne(cascade= CascadeType.ALL)
+	private User user;
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public void setFlight(Flight flight) {
+		this.flight = flight;
+	}
 	private String name;
 	private String email;
 	private Meal meal;

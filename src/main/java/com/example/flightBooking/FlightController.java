@@ -3,10 +3,13 @@ package com.example.flightBooking;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api/v1.0/flight")
@@ -29,8 +32,8 @@ public class FlightController {
 	String adminLogin(@RequestBody Admin admin) {
 		try {
 			return adminService.login(admin);
-		} catch (Exception e) {
-			return "Invalid Arguement";
+		} catch (RuntimeException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid arguements",e);
 		}
 	}
 	
@@ -46,15 +49,13 @@ public class FlightController {
 	}
 	
 	@PostMapping("/airline/inventory/add")
-	String addInventory(@RequestBody Flight flight)  {
+	ResponseEntity<Flight> addInventory(@RequestBody Flight flight)  {
 		try {
 			flightService.addFlight(flight);
-		} catch (Exception e) {
-			return "Error";
-		}
-		return "Successfully added";
-		
-	
+			return ResponseEntity.ok().body(flight);
+		} catch (AirlineNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Airline not found",e);
+		}	
 	}
 	
 }

@@ -14,20 +14,30 @@ public class TicketService {
 	@Autowired
 	FlightRepository flightRepository;
 	
+	@Autowired
+	UserRepository userRepository;
+	
 	Ticket getTicket(int pnr) {
 		return ticketRepository.findByPnr(pnr);
 	}
 	
-	int addTicket(Ticket ticket,int flightId) throws Exception {
-		Object flight = flightRepository.findById(flightId);
-			if(flight!=null) {
+	int addTicket(Ticket ticket,int flightId) {
+		Flight flight = flightRepository.getById(flightId);
+		User user = userRepository.findByEmail(ticket.getEmail());
+	        
+			if(flight==null) {
+				 System.out.println(ticket);
+				throw new RuntimeException("Flight not found");
+			}
+			else if(user==null) {
+				throw new RuntimeException("User not found");
+			}
+			else {
 				Random r = new Random();
 				int pnr = 100000 + (int)(r.nextFloat() * 899900);
 				ticket.setFlight(flight);
-				ticket.setPnr(pnr);
-			}
-			else {
-				throw new Exception("Flight not found");
+				ticket.setUser(user);
+				ticket.setPnr(pnr);				
 			}
 		ticketRepository.save(ticket);
 		return ticket.getPnr();

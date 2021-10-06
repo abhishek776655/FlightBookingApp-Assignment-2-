@@ -3,23 +3,21 @@ package com.example.flightBooking;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javassist.NotFoundException;
-
 @Service
-public class AdminService {
+public class UserService {
 	@Autowired
-	AdminRepository adminRepository;
+	UserRepository userRepository;
 	
-	Admin createAdmin(Admin admin) {
-		return adminRepository.save(admin);
+	User createUser(User user) {
+		return userRepository.save(user);
 	}
 	
-	String login(Admin admin) {
-		Admin payload = adminRepository.findByEmail(admin.getEmail());
+	String login(User user) {
+		User payload = userRepository.findByEmail(user.getEmail());
 		if(payload.equals(null)) {
 			throw new RuntimeException("User not found");
 		}
-		if(payload.getPassword().equals(admin.getPassword())) {
+		if(payload.getPassword().equals(user.getPassword())) {
 			return "Succesfully Logged In";
 		}
 		else {

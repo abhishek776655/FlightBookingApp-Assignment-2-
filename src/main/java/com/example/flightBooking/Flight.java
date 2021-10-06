@@ -1,6 +1,7 @@
 package com.example.flightBooking;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,8 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.example.flightBooking.constants.City;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Flight {
@@ -19,6 +22,7 @@ public class Flight {
 	
 	private String flightName;
 	
+	@JsonManagedReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Airline airline;
 	private City fromPlace;
@@ -29,6 +33,9 @@ public class Flight {
 	private int nonBusinessSeats;
 	private float ticketCost;
 	private int noOfRows;
+	
+	@OneToMany(mappedBy="flight")
+	private Set<Ticket>tickets;
 	
 	public Integer getFlightId() {
 		return flightId;

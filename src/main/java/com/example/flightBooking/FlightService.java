@@ -13,14 +13,14 @@ public class FlightService {
 	@Autowired
 	AirlineRepository airlineRepository;
 	
-	void addFlight(Flight flight) throws Exception {
+	void addFlight(Flight flight)  {
 		Airline airline = airlineRepository.findByName(flight.getAirline().getName());
 		if(airline!=null) {
 			flight.setAirline(airline);
 			repository.save(flight);
 		}
 		else {
-			throw new Exception("Incorrect Airline");
+			throw new AirlineNotFoundException("airline not found");
 		}
 		
 	}
